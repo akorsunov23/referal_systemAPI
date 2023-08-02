@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ввод проверочного кода</title>
+</head>
+<body>
+
+<div align="center">
+        {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+<form method="post">
+    {% csrf_token %}
+    <br>
+    {{ form.as_p }}
+    <br>
+    <button type="submit">Отправить</button>
+</form>
+</div>
+</body>
+</html>

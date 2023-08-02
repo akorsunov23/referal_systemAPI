@@ -62,13 +62,14 @@ class VerificationNumberAPI(generics.GenericAPIView):
     def post(self, request, phone_number):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            code = int(request.data["number"])
+            code = int(request.data["code"])
             user = self.get_queryset()
             if user.code == code:
-                login(request, user)
+                login(self.request, user)
                 return Response(
                     {"msg": f"Пользователь {user} аутентифицирован."},
                     status=status.HTTP_200_OK,
+                    headers=login(self.request, user),
                 )
             return Response(
                 {"msg": f"Код не верный"}, status=status.HTTP_401_UNAUTHORIZED

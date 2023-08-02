@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль пользователя</title>
+</head>
+<body>
+        {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+<h4>Пользователь с ID: {{ request.user.pk }}</h4>
+<ul>
+    <li>Номер телефона: {{ request.user.phone_number }} </li>
+    <li>Инвайт код: {{ request.user.your_invite_code }} </li>
+    {% if request.user.someone_invite_code is not None %}
+        <li>Чужой инвайт код: {{ request.user.someone_invite_code }} </li>
+    {% else %}
+        <li>
+        <form method="post">
+            {% csrf_token %}
+        <label for="someone_invite_code">Чужой инвайт код:</label>
+            <input type="text" name="someone_invite_code" id="someone_invite_code">
+            <button type="submit">Сохранить</button>
+        </form>
+        </li>
+    {% endif %}
+    {% if referral_list|length > 0 %}
+        <li>Рефералы: </li>
+        {% for ref in referral_list %}
+            <ul>
+            <li>{{ ref }}</li>
+            </ul>
+        {% endfor %}
+    {% endif %}
+</ul>
+</body>
+</html>

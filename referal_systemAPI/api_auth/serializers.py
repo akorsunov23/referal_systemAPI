@@ -16,4 +16,6 @@ class PhoneNumberSerializer(serializers.ModelSerializer):
 class VerificationNumberSerializer(serializers.Serializer):
     """Сериализатор ввода проверочного кода."""
 
-    number = serializers.IntegerField(max_value=9999, label="Проверочный код")
+    code = serializers.IntegerField(
+        max_value=9999, min_value=1000, label="Проверочный код"
+    )
