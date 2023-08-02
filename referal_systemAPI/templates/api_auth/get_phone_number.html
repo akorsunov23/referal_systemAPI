@@ -1,0 +1,23 @@
+{% load rest_framework %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Аутентификация по номеру телефона</title>
+
+<style>
+
+</style>
+
+</head>
+<body>
+<div align="center">
+<form method="post">
+    <br>
+    {% render_form serializer %}
+    <br>
+    <button type="submit" class="btn btn-default">Отправить</button>
+</form>
+</div>
+</body>
+</html>
