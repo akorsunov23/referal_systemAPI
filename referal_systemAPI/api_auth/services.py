@@ -1,9 +1,14 @@
+import os
+
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def send_sms(phones, code):
-    login = "akorsunov"
-    password = "2015Sasha"
+    login = os.getenv('LOGIN_SMS')
+    password = os.getenv("PASS_SMS")
     message = f"Код для аутентификации на сервисе: {code}"
     response = requests.post(
         f"https://smsc.ru/sys/send.php?"
