@@ -16,9 +16,8 @@ phone_validate = RegexValidator(
 
 class User(AbstractUser):
     """Кастомная модель пользователя."""
-
+    password = models.CharField(verbose_name="пароль", max_length=128, null=True, blank=True)
     username = None
-    password = None
     phone_number = models.CharField(
         unique=True,
         max_length=11,
@@ -27,7 +26,7 @@ class User(AbstractUser):
         blank=True,
         null=True,
     )
-    code = models.IntegerField(verbose_name="Проверочный код")
+    code = models.IntegerField(verbose_name="Проверочный код", null=True)
     your_invite_code = models.CharField(
         unique=True, max_length=6, verbose_name="инвайт-код"
     )
