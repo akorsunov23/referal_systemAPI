@@ -11,7 +11,7 @@ class GetProfileUserAPIView(generics.ListAPIView):
     serializer_class = ProfileUserSerializer
 
     def get_queryset(self):
-        return User.objects.filter(pk=self.kwargs["pk"])
+        return User.objects.filter(pk=self.request.user.pk)
 
     def put(self, request):
         serializer = InviteCodeSerializer(data=request.data)
