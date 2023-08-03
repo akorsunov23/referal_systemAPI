@@ -1,0 +1,20 @@
+version: '3'
+
+volumes:
+    pgdata:
+        driver: local
+services:
+    python:
+        restart: always
+        build:
+            context: .
+            dockerfile: docker/python/Dockerfile
+        volumes:
+            - ./referal_systemAPI:/srv/www/referal_systemAPI
+        expose:
+          - 8000
+        ports:
+            - 8000:8000
+        command: "python manage.py runserver"
+        env_file:
+          - ./.env
