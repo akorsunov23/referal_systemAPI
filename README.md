@@ -11,6 +11,19 @@ $ git clone https://github.com/akorsunov23/referal_systemAPI
 $ cd referal_systemAPI
 ```
 - Добавить в корень проекта файл '.env' и указать в нём переменные согласно инструкциям '.env.temp' 
+- Установить зависимости:
+````angular2html
+$ pip install -r req.txt
+````
+- Выполнить миграции в БД:
+```angular2html
+$ python manage.py migrate
+```
+- Запустить локальный сервер:
+````angular2html
+$ python manage.py runserver
+````
+### Docker
 - Запустить контейнеризацию, командой
 ````
 $ docker-compose build 
