@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics, status
 from rest_framework.response import Response
 
@@ -9,9 +10,6 @@ class GetProfileUserAPIView(generics.ListAPIView):
     """
     API запрос на профиль пользователя.
     В профиле отображается список пользователей с введённым инфвайт-кодом текущего.
-
-    Также в профиле есть возможность ввести чужой инвайт-код,
-    если он был введён раннее, то сохранение не будет.
     """
 
     serializer_class = ProfileUserSerializer
@@ -19,7 +17,18 @@ class GetProfileUserAPIView(generics.ListAPIView):
     def get_queryset(self):
         return User.objects.filter(pk=self.request.user.pk)
 
-    def put(self, request):
+
+class SetSomeoneInviteCodeApiView(generics.UpdateAPIView):
+    """
+    В профиле есть возможность ввести чужой инвайт-код,
+    если он был введён раннее, то сохранение не будет.
+    """
+    serializer_class = InviteCodeSerializer
+
+    def get_queryset(self):
+        return User.objects.filter(pk=self.kwargs['pk'])
+
+    def update(self, request, *args, **kwargs):
         serializer = InviteCodeSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             user = self.get_queryset().get()
