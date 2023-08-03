@@ -6,7 +6,13 @@ from .serializers import ProfileUserSerializer, InviteCodeSerializer
 
 
 class GetProfileUserAPIView(generics.ListAPIView):
-    """Запрос на профиль пользователя."""
+    """
+    API запрос на профиль пользователя.
+    В профиле отображается список пользователей с введённым инфвайт-кодом текущего.
+
+    Также в профиле есть возможность ввести чужой инвайт-код,
+    если он был введён раннее, то сохранение не будет.
+    """
 
     serializer_class = ProfileUserSerializer
 

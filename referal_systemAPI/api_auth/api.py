@@ -10,7 +10,11 @@ from .services import send_sms
 
 
 class GetPhoneNumberUserAPIView(generics.CreateAPIView):
-    """Представление запроса номера пользователя и сохранение его с кодом проверки."""
+    """
+    API запроса номера пользователя.
+    После ввода номера телефона, пользователю отправляется проверочный код по СМС
+     и если он отсутствует в БД - сохраняется.
+    """
 
     serializer_class = PhoneNumberSerializer
     queryset = User.objects.all()
@@ -52,7 +56,9 @@ class GetPhoneNumberUserAPIView(generics.CreateAPIView):
 
 
 class VerificationNumberAPI(generics.GenericAPIView):
-    """Ввод проверочного кода и аутентификация пользователя."""
+    """
+    Ввод проверочного кода и аутентификация пользователя.
+    """
 
     serializer_class = VerificationNumberSerializer
 
